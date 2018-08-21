@@ -1,0 +1,26 @@
+
+
+<div class="search-result__questions">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Author</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Answers amount</th>
+        <th scope="col">Tags</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let question of searchResult; let count = index">
+        <th scope="row">{{count}}</th>
+        <td>{{question.owner.display_name}}</td>
+        <td [innerHtml]="question.title"></td>
+        <td>{{question.answer_count}}</td>
+        <td>
+          <span *ngFor="let tag of question.tags">{{tag}}, </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,11 @@
+.search-bar {
+  &__form {
+    width: 60%;
+    max-width: 700px;
+    flex-wrap: nowrap;
+  }
+
+  &__search-input {
+    flex-grow: 1;
+  }
+}
