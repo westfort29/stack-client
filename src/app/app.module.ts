@@ -10,7 +10,9 @@ import { AppComponent } from './app.component';
 import {
   SearchBarComponent,
   SearchResultsComponent,
-  NotFoundComponent
+  NotFoundComponent,
+  QuestionsTableComponent,
+  QuickPanelComponent
 } from './components';
 import {
   ApiQuestionsService
@@ -21,7 +23,9 @@ import {
     AppComponent,
     NotFoundComponent,
     SearchBarComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    QuestionsTableComponent,
+    QuickPanelComponent
   ],
   imports: [
     BrowserModule,

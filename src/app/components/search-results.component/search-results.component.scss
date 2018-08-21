@@ -1,5 +1,9 @@
 .search-result {
   &__questions {
-    margin: 20px 10% 5px 30%;
+    margin: 20px 10% 5px 10%;
+
+    &--shifted-right {
+      margin-left: 30%;
+    }
   }
 }

@@ -11,4 +11,5 @@ export interface IOwner {
   user_type: string;
   display_name: string;
   profile_image: string;
+  user_id: number;
 }

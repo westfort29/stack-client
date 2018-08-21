@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiQuestionsService } from '../../services';
 import { IQuestion } from '../../entities/question';
 
@@ -15,12 +15,13 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   public isSidePanelShown: boolean;
   public isSidePanelLoading: boolean;
   public sidePanelItems: any[];
-  public searchResult: IQuestion[];
+  public searchResult: IQuestion[] = [];
   private routerParamsSub: Subscription;
   public searchString: string;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private apiQuestionsService: ApiQuestionsService
   ) {}
 
@@ -31,12 +32,26 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  runSearch(): void {
+  public runSearch(): void {
     this.apiQuestionsService.getQuestionsList(this.searchString).subscribe(
       (data: any[]) => {
         this.searchResult = data;
+        console.log(data);
       }
     );
+  }
+
+  public onAuthor(authorId: string): void {
+    console.log(authorId);
+  }
+
+  public onTagClicked(tag: string) {
+    console.log(tag);
+  }
+
+  public onQuestionNavigate(questionId: number) {
+    this.router.navigate(['/answers', questionId]);
+    console.log(questionId);
   }
 
   ngOnDestroy() {
