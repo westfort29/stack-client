@@ -5,16 +5,17 @@
     will-change: marging-left;
 
     &--shifted-right {
-      margin-left: 30%;
+      margin-left: 35%;
     }
   }
 
   &__quick-panel {
-    position: absolute;
-    width: 27%;
+    position: fixed;
+    width: 32%;
+    max-height: 100vh;
     overflow: auto;
     padding: 10px;
-    padding-top: 0;
+    padding-top: 30px;
     transform: translateX(-110%);
     will-change: transform;
     transition: transform .5s;
