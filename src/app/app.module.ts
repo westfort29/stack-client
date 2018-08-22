@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ROUTES } from './app.routes';
+import { AppRoutingModule } from './app-routing.module';
+
+import { ROUTES } from './app-routing.module/app.routes';
 
 import { AppComponent } from './app.component';
 import {
@@ -12,7 +14,8 @@ import {
   SearchResultsComponent,
   NotFoundComponent,
   QuestionsTableComponent,
-  QuickPanelComponent
+  QuickPanelComponent,
+  QuestionPageComponent
 } from './components';
 import {
   ApiQuestionsService
@@ -25,13 +28,15 @@ import {
     SearchBarComponent,
     SearchResultsComponent,
     QuestionsTableComponent,
-    QuickPanelComponent
+    QuickPanelComponent,
+    QuestionPageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES)
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [
     ApiQuestionsService

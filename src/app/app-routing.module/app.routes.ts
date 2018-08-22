@@ -3,8 +3,9 @@ import { Routes } from '@angular/router';
 import {
   NotFoundComponent,
   SearchBarComponent,
-  SearchResultsComponent
-} from './components';
+  SearchResultsComponent,
+  QuestionPageComponent
+} from '../components';
 
 export const ROUTES: Routes = [
   {
@@ -22,7 +23,7 @@ export const ROUTES: Routes = [
   },
   {
     path: 'question/:id',
-    component: NotFoundComponent
+    component: QuestionPageComponent
   },
   {
     path: '**',

@@ -1,13 +1,23 @@
-<app-quick-panel></app-quick-panel>
-<div class="search-result__questions">
-  <p>You have searched for: "{{searchString}}"</p>
+<section
+  class="search-result__quick-panel"
+  [ngClass]="{'search-result__quick-panel--visible': quickPanelItems.length}"
+>
+  <app-quick-panel
+    [questions]="quickPanelItems"
+    [searchParam]="quickPanelSearchParam"
+    [searchValue]="quickPanelSearchValue">
+  </app-quick-panel>
+</section>
+<section
+  class="search-result__questions"
+  [ngClass]="{'search-result__questions--shifted-right': quickPanelItems.length}">
+  <h2>You have searched for: "{{searchString}}"</h2>
   <app-questions-table
     *ngIf="searchResult.length"
     [questions]="searchResult"
     (onAuthor)="onAuthor($event)"
-    (onTag)="onTagClicked($event)"
-    (onNavigateItem)="onQuestionNavigate($event)"
+    (onTag)="onTag($event)"
   >
   </app-questions-table>
   <h2 *ngIf="!searchResult.length">No questions found</h2>
-</div>
+</section>

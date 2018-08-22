@@ -1,7 +1,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Author</th>
       <th scope="col">Subject</th>
       <th scope="col">Answers</th>
@@ -9,11 +8,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let question of questions; let count = index">
-      <th scope="row">{{count}}</th>
+    <tr *ngFor="let question of questions">
       <td (click)="onAuthorClick(question.owner.user_id)">{{question.owner.display_name}}</td>
-      <td (click)="onNavigateItemClick(question.question_id)" [innerHtml]="question.title"></td>
-      <td (click)="onNavigateItemClick(question.question_id)">{{question.answer_count}}</td>
+      <td [routerLink]="['/question/', question.question_id]" [innerHtml]="question.title"></td>
+      <td [routerLink]="['/question/', question.question_id]">{{question.answer_count}}</td>
       <td>
         <span *ngFor="let tag of question.tags; let last = last" (click)="onTagClick(tag)">
           {{tag}}<span *ngIf="!last">, </span>

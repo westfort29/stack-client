@@ -1,0 +1,91 @@
+{
+    "items": [
+      {
+        "tags": [
+          "c++",
+          "pointers",
+          "reference",
+          "c++-faq"
+        ],
+        "owner": {
+          "reputation": 29152,
+          "user_id": 123,
+          "user_type": "registered",
+          "accept_rate": 77,
+          "profile_image": "https://i.stack.imgur.com/Tn2xB.jpg?s=128&g=1",
+          "display_name": "prakash",
+          "link": "https://stackoverflow.com/users/123/prakash"
+        },
+        "is_answered": true,
+        "view_count": 802901,
+        "protected_date": 1364445977,
+        "answer_count": 33,
+        "score": 2646,
+        "last_activity_date": 1533936947,
+        "creation_date": 1221163437,
+        "last_edit_date": 1529213665,
+        "question_id": 57483,
+        "link": "https://stackoverflow.com/questions/57483/what-are-the-differences-between-a-pointer-variable-and-a-reference-variable-in",
+        "title": "What are the differences between a pointer variable and a reference variable in C++?"
+      },
+      {
+        "tags": [
+          "language-agnostic",
+          "coding-style"
+        ],
+        "owner": {
+          "reputation": 29152,
+          "user_id": 123,
+          "user_type": "registered",
+          "accept_rate": 77,
+          "profile_image": "https://i.stack.imgur.com/Tn2xB.jpg?s=128&g=1",
+          "display_name": "prakash",
+          "link": "https://stackoverflow.com/users/123/prakash"
+        },
+        "is_answered": true,
+        "view_count": 120838,
+        "protected_date": 1468565605,
+        "accepted_answer_id": 566486,
+        "answer_count": 9,
+        "score": 206,
+        "last_activity_date": 1482257948,
+        "creation_date": 1221034862,
+        "last_edit_date": 1482255790,
+        "question_id": 53609,
+        "link": "https://stackoverflow.com/questions/53609/what-does-foo-really-mean",
+        "title": "What does &#39;foo&#39; really mean?"
+      },
+      {
+        "tags": [
+          "c++",
+          "c",
+          "memory-leaks"
+        ],
+        "owner": {
+          "reputation": 29152,
+          "user_id": 123,
+          "user_type": "registered",
+          "accept_rate": 77,
+          "profile_image": "https://i.stack.imgur.com/Tn2xB.jpg?s=128&g=1",
+          "display_name": "prakash",
+          "link": "https://stackoverflow.com/users/123/prakash"
+        },
+        "is_answered": true,
+        "view_count": 151431,
+        "closed_date": 1351022657,
+        "answer_count": 29,
+        "community_owned_date": 1223811449,
+        "score": 121,
+        "last_activity_date": 1503422252,
+        "creation_date": 1220617080,
+        "last_edit_date": 1503422252,
+        "question_id": 45627,
+        "link": "https://stackoverflow.com/questions/45627/how-do-you-detect-avoid-memory-leaks-in-your-unmanaged-code",
+        "closed_reason": "not constructive",
+        "title": "How do you detect/avoid Memory leaks in your (Unmanaged) code?"
+      }
+    ],
+    "has_more": true,
+    "quota_max": 10000,
+    "quota_remaining": 9985
+  }

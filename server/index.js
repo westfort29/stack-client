@@ -3,6 +3,17 @@ var cors = require('cors');
 var fetch = require('node-fetch');
 var app = express();
 
+var questionsMock = null;
+var userQuestionsMock = null;
+var tagQuestionsMock = null;
+var answersMock = null;
+
+//UNCOMMENT TO USE MOCK DATA OR COMMENT TO USE REAL API
+questionsMock = require('./mocks/questions.json');
+userQuestionsMock = require('./mocks/user-questions.json');
+tagQuestionsMock = require('./mocks/tag-questions.json');
+answersMock = require('./mocks/answers');
+
 // CORS
 app.use(cors());
 app.options('*', cors());
@@ -12,30 +23,91 @@ const API_BASE_URL = "http://api.stackexchange.com/2.2/";
 app.get('/questions', function (req, res) {
   var searchString = encodeURIComponent(req.query.searchValue.trim());
 
-  console.log(`${API_BASE_URL}search?order=desc&sort=activity&intitle=${searchString}&site=stackoverflow`);
+  let url = `${API_BASE_URL}search?order=desc&sort=activity&intitle=${searchString}&site=stackoverflow&filter=!-*jbN-o9Aeie`
+  console.log(`sending request to ${url}`);
 
-  var response = {"items":[{"tags":["javascript","typescript","tslint","delete-keyword"],"owner":{"reputation":2105,"user_id":4988637,"user_type":"registered","accept_rate":80,"profile_image":"https://lh3.googleusercontent.com/-m8Xu1FWsVQ0/AAAAAAAAAAI/AAAAAAAAAA8/MhDBfVsYN7g/photo.jpg?sz=128","display_name":"Acidic","link":"https://stackoverflow.com/users/4988637/acidic"},"is_answered":true,"view_count":247,"answer_count":1,"score":2,"last_activity_date":1518964121,"creation_date":1518961474,"last_edit_date":1518961927,"question_id":48852333,"link":"https://stackoverflow.com/questions/48852333/statically-delete-object-key-javascript","title":"Statically delete object key JavaScript"},{"tags":["jquery","html"],"owner":{"reputation":32,"user_id":6430634,"user_type":"registered","accept_rate":89,"profile_image":"https://graph.facebook.com/10153701287271789/picture?type=large","display_name":"Toni Au","link":"https://stackoverflow.com/users/6430634/toni-au"},"is_answered":true,"view_count":21,"accepted_answer_id":38334309,"answer_count":1,"score":1,"last_activity_date":1468340865,"creation_date":1468340314,"last_edit_date":1468340865,"question_id":38334212,"link":"https://stackoverflow.com/questions/38334212/access-dynamic-value-to-delete-object-key","title":"Access dynamic value to delete object key"},{"tags":["javascript","json"],"owner":{"reputation":1811,"user_id":3783804,"user_type":"registered","accept_rate":73,"profile_image":"https://www.gravatar.com/avatar/36541fef4fa53fb45c6d28704c434c44?s=128&d=identicon&r=PG&f=1","display_name":"byrdr","link":"https://stackoverflow.com/users/3783804/byrdr"},"is_answered":true,"view_count":71,"answer_count":1,"score":0,"last_activity_date":1444236311,"creation_date":1444232220,"last_edit_date":1444232696,"question_id":32996556,"link":"https://stackoverflow.com/questions/32996556/javascript-cant-delete-object-key-when-not-in-quotes","title":"javascript can&#39;t delete object key when not in quotes"}],"has_more":false,"quota_max":300,"quota_remaining":246};
+  if (questionsMock) {
+    res.header('Content-Type', 'application/json;charset=UTF-8');
+    res.status(200);
+    res.send(convertQuestions(questionsMock));
+  } else {
+    console.log('real api call');
+    handleQuestionsRequest(url, res);
+  }
+});
 
-  /* fetch(`${API_BASE_URL}search?order=desc&sort=activity&site=stackoverflow&intitle=${searchString}`)
-    .then(res => res.json())
-    .then((data) => {
-      res.header('Content-Type', 'application/json;charset=UTF-8');
-      res.status(200);
-      console.log('WHAT THE');
-      console.log(data);
-      JSON.stringify(data, null, 2);
-      res.send(data);
-    })
-    .catch((exeption) => {
-      res.status(400);
-      res.send();
-    }) */
+app.get('/questions/user', function (req, res) {
+  var userId = req.query.userId;
 
-/* 
-  res.header('Content-Type', 'application/json;charset=UTF-8');
-  res.send(result); */
-  var result = convertQuestions(response);
-  res.send(result);
+  let url = `${API_BASE_URL}users/${userId}/questions?order=desc&sort=votes&site=stackoverflow`;
+  console.log(`sending request to ${url}`);
+
+  if (userQuestionsMock) {
+    res.header('Content-Type', 'application/json;charset=UTF-8');
+    res.status(200);
+    res.send(convertQuestions(userQuestionsMock));
+  } else {
+    console.log('real api call');
+    handleQuestionsRequest(url, res);
+  }
+});
+
+app.get('/questions/tag', function (req, res) {
+  var tag = encodeURIComponent(req.query.tag.trim());
+
+  let url = `${API_BASE_URL}search?pagesize=10&order=desc&sort=votes&tagged=${tag}&site=stackoverflow`
+  console.log(`sending request to ${url}`);
+
+  if (tagQuestionsMock) {
+    res.header('Content-Type', 'application/json;charset=UTF-8');
+    res.status(200);
+    res.send(convertQuestions(tagQuestionsMock));
+  } else {
+    console.log('real api call');
+    handleQuestionsRequest(url, res);
+    }
+});
+
+app.get('/answers', function (req, res) {
+  var questionId = encodeURIComponent(req.query.questionId.trim());
+
+  let answersUrl = `${API_BASE_URL}questions/${questionId}/answers?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wzu0T`
+  let questionUrl = `${API_BASE_URL}questions/${questionId}?order=desc&sort=activity&site=stackoverflow&filter=!-*jbN-o9Aeie`;
+  console.log(`sending request to ${answersUrl} and ${questionUrl}`);
+
+  if (answersMock) {
+    res.header('Content-Type', 'application/json;charset=UTF-8');
+    res.status(200);
+    res.send(answersMock);
+  } else {
+    console.log('real api call');
+
+    Promise.all([
+      fetch(answersUrl)
+        .then(data => data.json()),
+      fetch(questionUrl)
+        .then(question => question.json())
+    ])
+      .then(responses => {
+
+        let result = {
+          answers: [],
+          question: {}
+        };
+
+        result.answers = convertAnswers(responses[0]);
+        result.question = convertQuestions(responses[1])[0];
+
+        res.header('Content-Type', 'application/json;charset=UTF-8');
+        res.status(200);
+        console.log(JSON.stringify(result, null, 2));
+        res.send(result);
+      })
+      .catch((exeption) => {
+        res.status(400);
+        res.send();
+      });
+    }
 });
 
 function convertQuestions(questions) {
@@ -47,11 +119,45 @@ function convertQuestions(questions) {
     convertedQuestion.question_id = question.question_id;
     convertedQuestion.title = question.title;
     convertedQuestion.answer_count = question.answer_count;
+    convertedQuestion.creation_date = question.creation_date;
+    convertedQuestion.body = question.body;
     result.push(convertedQuestion);
   });
   return result;
 }
 
+function convertAnswers(answers) {
+  var result = [];
+  answers.items.forEach(answer => {
+    var convertedAnswer = {};
+    convertedAnswer.owner = Object.assign({}, answer.owner);
+    convertedAnswer.answers_id = answer.answers_id;
+    convertedAnswer.creation_date = answer.creation_date;
+    convertedAnswer.body = answer.body;
+    convertedAnswer.question_id = answer.question_id;
+    result.push(convertedAnswer);
+  });
+  return result;
+}
+
+function handleQuestionsRequest(url, res) {
+  fetch(url)
+    .then(data => data.json())
+    .then((data) => {
+      res.header('Content-Type', 'application/json;charset=UTF-8');
+      res.status(200);
+      res.send(convertQuestions(data));
+    })
+    .catch((exeption) => {
+      res.status(400);
+      res.send();
+    })
+}
+
+app.get('/', function(req, res) {
+  res.send('<h1>StackOverflow api frontier middleware server</h1>');
+})
+
 app.listen(3000, function () {
-  console.log('Server started on port 3000!');
+  console.log('Server started on http://localhost:3000 !');
 });

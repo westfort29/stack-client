@@ -9,7 +9,6 @@ export class QuestionsTableComponent {
   @Input() questions: IQuestion[];
   @Output() onAuthor = new EventEmitter<number>();
   @Output() onTag = new EventEmitter<string>();
-  @Output() onNavigateItem = new EventEmitter<number>();
 
   public onTagClick(tag: string) {
     this.onTag.emit(tag);
@@ -19,7 +18,4 @@ export class QuestionsTableComponent {
     this.onAuthor.emit(authorId);
   }
 
-  public onNavigateItemClick(questionId: number) {
-    this.onNavigateItem.emit(questionId);
-  }
 }

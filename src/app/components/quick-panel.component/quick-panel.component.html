@@ -1,3 +1,5 @@
-<section>
-  {{questions | json}}
+<section *ngIf="questions.length">
+  <h3>Questions by {{searchParam}} {{searchValue}}</h3>
+  <app-questions-table [questions]="questions">
+  </app-questions-table>
 </section>

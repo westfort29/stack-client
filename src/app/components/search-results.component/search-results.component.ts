@@ -1,27 +1,32 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ApiQuestionsService } from '../../services';
 import { IQuestion } from '../../entities/question';
+
+const QUICK_PANEL_SEARCH_OPTIONS = {
+  byTag: 'tag',
+  byAuthor: 'author'
+};
+Object.freeze(QUICK_PANEL_SEARCH_OPTIONS);
 
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.scss'],
-  host: {'class': 'search-result'}
+  styleUrls: ['./search-results.component.scss']
 })
 
 export class SearchResultsComponent implements OnInit, OnDestroy {
-  public isSidePanelShown: boolean;
-  public isSidePanelLoading: boolean;
-  public sidePanelItems: any[];
+  @HostBinding('class') class = 'search-result';
+  public quickPanelItems: IQuestion[] = [];
   public searchResult: IQuestion[] = [];
   private routerParamsSub: Subscription;
   public searchString: string;
+  public quickPanelSearchParam = '';
+  public quickPanelSearchValue = '';
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private apiQuestionsService: ApiQuestionsService
   ) {}
 
@@ -33,25 +38,35 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   public runSearch(): void {
-    this.apiQuestionsService.getQuestionsList(this.searchString).subscribe(
-      (data: any[]) => {
-        this.searchResult = data;
-        console.log(data);
-      }
-    );
+    this.apiQuestionsService.getQuestionsList(this.searchString)
+      .subscribe(
+        data => {
+          this.searchResult = data;
+          console.log(data);
+        }
+      );
   }
 
   public onAuthor(authorId: string): void {
-    console.log(authorId);
+    this.apiQuestionsService.getPopularQuestionsByAuthor(authorId)
+      .subscribe(
+        (questions: IQuestion[]) => {
+          this.quickPanelItems = questions;
+          this.quickPanelSearchParam = QUICK_PANEL_SEARCH_OPTIONS.byAuthor;
+          this.quickPanelSearchValue = questions[0].owner.display_name;
+        }
+      );
   }
 
-  public onTagClicked(tag: string) {
-    console.log(tag);
-  }
-
-  public onQuestionNavigate(questionId: number) {
-    this.router.navigate(['/answers', questionId]);
-    console.log(questionId);
+  public onTag(tag: string) {
+    this.apiQuestionsService.getPopupalQuestionsByTag(tag)
+      .subscribe(
+        (questions: IQuestion[]) => {
+          this.quickPanelItems = questions;
+          this.quickPanelSearchParam = QUICK_PANEL_SEARCH_OPTIONS.byTag;
+          this.quickPanelSearchValue = tag;
+        }
+      );
   }
 
   ngOnDestroy() {

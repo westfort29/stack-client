@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IQuestion } from '../../entities/question';
 
 @Component({
   selector: 'app-quick-panel',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./quick-panel.component.scss']
 })
 export class QuickPanelComponent {
-  public questions: any[] = ['any'];
+  @Input() questions: IQuestion[];
+  @Input() searchParam: string;
+  @Input() searchValue: string;
 }
