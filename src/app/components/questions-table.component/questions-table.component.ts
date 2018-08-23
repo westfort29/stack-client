@@ -41,11 +41,10 @@ export class QuestionsTableComponent {
     if (this.sortOptions.type === option) {
       if (this.sortOptions.order === this.constants.SORT_DIRECTION.desc) {
         this.sortOptions.order = this.constants.SORT_DIRECTION.asc;
-        this.refreshSortOptionsLink();
       } else {
         this.sortOptions.order = this.constants.SORT_DIRECTION.desc;
-        this.refreshSortOptionsLink();
       }
+      this.refreshSortOptionsLink();
     }
   }
 

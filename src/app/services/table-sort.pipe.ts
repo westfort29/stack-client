@@ -19,40 +19,66 @@ export class TableSortPipe implements PipeTransform {
           arraySorting.less = 1;
         }
 
-        if (sortConfig.type === this.constants.SORT_OPTIONS.title
-          || sortConfig.type === this.constants.SORT_OPTIONS.answer_count) {
-            return array.sort(
-              (el1, el2) => {
-                if (el1[sortConfig.type] > el2[sortConfig.type]) {
-                  return arraySorting.more;
-                }
-                if (el1[sortConfig.type] < el2[sortConfig.type]) {
-                  return arraySorting.less;
-                }
-                if (el1[sortConfig.type] === el2[sortConfig.type]) {
-                  return 0;
-                }
-              }
-            );
-          } else if (sortConfig.type === this.constants.SORT_OPTIONS.author) {
-            return array.sort(
-              (el1, el2) => {
-                if (el1.owner.display_name > el2.owner.display_name) {
-                  return arraySorting.more;
-                }
-                if (el1.owner.display_name < el2.owner.display_name) {
-                  return arraySorting.less;
-                }
-                if (el1.owner.display_name === el2.owner.display_name) {
-                  return 0;
-                }
-              }
-            );
-          }
+        if (sortConfig.type === this.constants.SORT_OPTIONS.title) {
+          this.sortByQuestionTitle(array, arraySorting);
+        }
+        if (sortConfig.type === this.constants.SORT_OPTIONS.answer_count) {
+          return this.sortByAnswersAmount(array, arraySorting);
+        } else if (sortConfig.type === this.constants.SORT_OPTIONS.author) {
+          return this.sortByAuthor(array, arraySorting);
+        }
       }
       return array;
     } else {
       return [];
     }
+  }
+
+  sortByAuthor(array, arraySorting): IQuestion[] {
+    return array.sort(
+      (el1, el2) => {
+        if (el1.owner.display_name.toLocaleLowerCase() > el2.owner.display_name.toLocaleLowerCase()) {
+          return arraySorting.more;
+        }
+        if (el1.owner.display_name.toLocaleLowerCase() < el2.owner.display_name.toLocaleLowerCase()) {
+          return arraySorting.less;
+        }
+        if (el1.owner.display_name.toLocaleLowerCase() === el2.owner.display_name.toLocaleLowerCase()) {
+          return 0;
+        }
+      }
+    );
+  }
+
+  sortByAnswersAmount(array, arraySorting): IQuestion[] {
+    return array.sort(
+      (el1, el2) => {
+        if (el1.answer_count > el2.answer_count) {
+          return arraySorting.more;
+        }
+        if (el1.answer_count < el2.answer_count) {
+          return arraySorting.less;
+        }
+        if (el1.answer_count === el2.answer_count) {
+          return 0;
+        }
+      }
+    );
+  }
+
+  sortByQuestionTitle(array, arraySorting) {
+    return array.sort(
+      (el1, el2) => {
+        if (el1.title.toLocaleLowerCase() > el2.title.toLocaleLowerCase()) {
+          return arraySorting.more;
+        }
+        if (el1.title.toLocaleLowerCase() < el2.title.toLocaleLowerCase()) {
+          return arraySorting.less;
+        }
+        if (el1.title.toLocaleLowerCase() === el2.title.toLocaleLowerCase()) {
+          return 0;
+        }
+      }
+    );
   }
 }

@@ -55,7 +55,7 @@ app.get('/questions/user', function (req, res) {
 app.get('/questions/tag', function (req, res) {
   var tag = encodeURIComponent(req.query.tag.trim());
 
-  let url = `${API_BASE_URL}search?pagesize=10&order=desc&sort=votes&tagged=${tag}&site=stackoverflow`
+  let url = `${API_BASE_URL}search?pagesize=20&order=desc&sort=votes&tagged=${tag}&site=stackoverflow`
   console.log(`sending request to ${url}`);
 
   if (tagQuestionsMock) {
