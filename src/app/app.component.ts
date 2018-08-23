@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { fadeAnimation } from './animate';
+import { slideAnimation } from './animate';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [fadeAnimation]
+  animations: [slideAnimation]
 })
 export class AppComponent {
   title = 'stack-client';
