@@ -9,10 +9,10 @@ var tagQuestionsMock = null;
 var answersMock = null;
 
 //UNCOMMENT TO USE MOCK DATA OR COMMENT TO USE REAL API
-questionsMock = require('./mocks/questions.json');
+/* questionsMock = require('./mocks/questions.json');
 userQuestionsMock = require('./mocks/user-questions.json');
 tagQuestionsMock = require('./mocks/tag-questions.json');
-answersMock = require('./mocks/answers');
+answersMock = require('./mocks/answers'); */
 
 // CORS
 app.use(cors());
