@@ -5,7 +5,7 @@ export interface IQuestion {
   title: string;
   answer_count: number;
   body: string;
-  creation_date: string;
+  creation_date: number;
 }
 
 export interface IOwner {

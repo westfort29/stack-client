@@ -119,7 +119,7 @@ function convertQuestions(questions) {
     convertedQuestion.question_id = question.question_id;
     convertedQuestion.title = question.title;
     convertedQuestion.answer_count = question.answer_count;
-    convertedQuestion.creation_date = question.creation_date;
+    convertedQuestion.creation_date = question.creation_date * 1000;
     convertedQuestion.body = question.body;
     result.push(convertedQuestion);
   });
@@ -132,7 +132,7 @@ function convertAnswers(answers) {
     var convertedAnswer = {};
     convertedAnswer.owner = Object.assign({}, answer.owner);
     convertedAnswer.answers_id = answer.answers_id;
-    convertedAnswer.creation_date = answer.creation_date;
+    convertedAnswer.creation_date = answer.creation_date * 1000;
     convertedAnswer.body = answer.body;
     convertedAnswer.question_id = answer.question_id;
     result.push(convertedAnswer);

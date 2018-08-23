@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import {
   NotFoundComponent,
-  SearchBarComponent,
+  MainPageComponent,
   SearchResultsComponent,
   QuestionPageComponent
 } from '../components';
@@ -15,7 +15,7 @@ export const ROUTES: Routes = [
   },
   {
     path: 'search',
-    component: SearchBarComponent
+    component: MainPageComponent
   },
   {
     path: 'search-result/:search',

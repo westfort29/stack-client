@@ -10,7 +10,7 @@
         "display_name": "Bergi",
         "link": "https://stackoverflow.com/users/1048572/bergi"
       },
-      "creation_date": 1518964121,
+      "creation_date": 1518964121000,
       "body": "<p>a) ignore the warning<br>\nb) use a <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map\" rel=\"nofollow noreferrer\"><code>Map</code></a> instead</p>\n",
       "question_id": 48852333
     }
@@ -34,7 +34,7 @@
     "question_id": 48852333,
     "title": "Statically delete object key JavaScript",
     "answer_count": 1,
-    "creation_date": 1518961474,
+    "creation_date": 1518961474000,
     "body": "<p>I'm using TypeScript along with TSLint, and I have the following code:</p>\n\n<pre><code>var myObj = {}\nvar id = \"key\"\nmyObj[id] = 1\ndelete myObj[id]\n</code></pre>\n\n<p>But I receive a hint from TSLint: <a href=\"https://palantir.github.io/tslint/rules/no-dynamic-delete/\" rel=\"nofollow noreferrer\"><code>Do not delete dynamically computed property keys. (no-dynamic-delete)</code></a></p>\n\n<p><em>The rationale for this rule (as stated on the documentation for TSLint):</em></p>\n\n<blockquote>\n  <p>Deleting dynamically computed keys is dangerous and not well optimized.</p>\n</blockquote>\n\n<hr>\n\n<p>My question is, without disabling this hint in the TSLint configuration file, how should I safely and optimally delete the <code>id</code> key in <code>myObj</code>?</p>\n"
   }
 }

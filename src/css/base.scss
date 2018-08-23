@@ -1,5 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
 body {
   background: #eee;
+  color: black;
 }
 
 router-outlet ~ * {

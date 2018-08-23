@@ -1,5 +1,9 @@
 <section *ngIf="questions.length">
   <h3>Questions by {{searchParam}} {{searchValue}}</h3>
-  <app-questions-table [questions]="questions">
+  <app-questions-table
+    [questions]="questions"
+    (onAuthor)="onAuthorClick($event)"
+    (onTag)="onTagClick($event)"
+  >
   </app-questions-table>
 </section>

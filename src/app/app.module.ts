@@ -6,10 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { ROUTES } from './app-routing.module/app.routes';
-
 import { AppComponent } from './app.component';
 import {
+  MainHeaderComponent,
+  MainPageComponent,
   SearchBarComponent,
   SearchResultsComponent,
   NotFoundComponent,
@@ -20,16 +20,21 @@ import {
 import {
   ApiQuestionsService
 } from './services';
+import { ConstantsService } from './services/constants.service';
+import { TableSortPipe } from './services/table-sort.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainHeaderComponent,
+    MainPageComponent,
     NotFoundComponent,
     SearchBarComponent,
     SearchResultsComponent,
     QuestionsTableComponent,
     QuickPanelComponent,
-    QuestionPageComponent
+    QuestionPageComponent,
+    TableSortPipe
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,8 @@ import {
     BrowserAnimationsModule
   ],
   providers: [
-    ApiQuestionsService
+    ApiQuestionsService,
+    ConstantsService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,15 @@
-<nav class="navbar navbar-light justify-content-center">
-  <form class="form-inline search-bar__form" (submit)="onSearch()">
-    <input
-      class="form-control mr-sm-2 search-bar__search-input"
-      type="search" placeholder="Search"
-      aria-label="Search"
-      name="search"
-      [(ngModel)]="searchString"
-    >
-    <button
-      class="btn btn-outline-success my-2 my-sm-0"
-      type="submit"
-    >
-      Search
-    </button>
-  </form>
-</nav>
+<form class="form-inline search-bar__form" (submit)="onSearch()">
+  <input
+    class="form-control mr-sm-2 search-bar__search-input"
+    type="search" placeholder="Search"
+    aria-label="Search"
+    name="search"
+    [(ngModel)]="searchString"
+  >
+  <button
+    class="btn btn-outline-success my-2 my-sm-0"
+    type="submit"
+  >
+    Search
+  </button>
+</form>

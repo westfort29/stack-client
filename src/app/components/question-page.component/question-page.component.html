@@ -1,11 +1,12 @@
 <section class="container" *ngIf="questionData">
   <div class="card">
     <div class="card-header text-white bg-info mb-3">
-      {{questionData.question.owner.display_name}}
+      <h5 [innerHtml]="questionData.question.title"></h5>
+      <p>{{questionData.question.owner.display_name}}</p>
     </div>
     <div class="card-body">
       <blockquote class="blockquote mb-0">
-        <h5 [innerHtml]="questionData.question.title"></h5>
+        
         <p [innerHtml]="questionData.question.body"></p>
         <footer class="blockquote-footer">{{questionData.question.creation_date | date:'medium'}}</footer>
       </blockquote>

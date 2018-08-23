@@ -27,7 +27,6 @@ export class QuestionPageComponent implements OnInit, OnDestroy {
       this.apiQuestionsService.getAnswersByQuestion(params['id'])
         .subscribe(
           (data: IQuestionData) => {
-            console.log(data);
             this.questionData = data;
           }
         );

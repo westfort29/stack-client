@@ -5,7 +5,10 @@
   <app-quick-panel
     [questions]="quickPanelItems"
     [searchParam]="quickPanelSearchParam"
-    [searchValue]="quickPanelSearchValue">
+    [searchValue]="quickPanelSearchValue"
+    (onAuthor)="onAuthor($event)"
+    (onTag)="onTag($event)"
+  >
   </app-quick-panel>
 </section>
 <section
